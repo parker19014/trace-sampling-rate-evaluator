@@ -52,3 +52,10 @@ adjustment requires re-emitting prior decisions or accepting a discontinuity.
   double-precision floating point; the threshold is therefore accurate to roughly
   15 significant digits, which is far below the granularity that matters for
   sampling.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
